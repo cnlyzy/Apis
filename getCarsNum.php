@@ -28,47 +28,7 @@ curl_close($curl);
 if ($err) {
     echo "cURL Error #:" . $err;
 } else {
-    echo $response;die();
+    echo $response;
 //    $result = json_decode($response, true)['body']['result'];
 //    print_r($result);
 }
-
-////求数组长度
-//$resultnum=count($result);
-//echo $resultnum;
-//if ($resultnum!=0){
-//    //循环查找数组中的值,也可用foreach
-//    for ($i=0;$i<=$resultnum-1;$i++){
-//        //ssid站点ID由用户选择
-//        if ($result[$i]['ssid']=='1'){
-//            echo '该租车点有 '.$result[$i]['canusenum'].' 辆车';
-//            break;
-//        }else{
-//            echo '该租车点还没有车,请耐心等待!';
-//            break;
-//        }
-//    }
-//}
-
-//更加高效的方法
-if (!empty($result)) {
-    $tmp = array_reduce($result, function ($v, $w) {
-        $v[$w['ssid']] = $w['canusenum'];
-        return $v;
-    });
-    if (isset($tmp[$ssid])) {
-        echo $stationname . ' 共有 ' . $tmp[$ssid] . ' 辆车,赶紧下单吧!';
-        echo "<audio controls=\"controls\" autoplay=\"autoplay\">
-                <source src=\"./song.mp3\" type=\"audio/mpeg\" />
-                </audio>";
-    } else {
-        echo $stationname . ' 租车点还没有车,请耐心等待!';
-    }
-
-} else {
-    echo '车辆信息获取失败，请联系管理员。';
-    exit();
-}
-?>
-
-
