@@ -20,3 +20,4 @@ function getRank($wxurl){
     $content = curl_exec($ch);
     curl_close($ch);
     echo $content;
+}
